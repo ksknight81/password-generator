@@ -12,6 +12,13 @@ var lowerCase = window.prompt('Would you like to have a lowercase value?');
 var upperCase = window.prompt('Would you like to have an Uppercase value?');
 var numberValue = window.prompt('Would you like to add a number?');
 var specialCharacters = window.prompt('Would you like to use special characters?');
+
+//show values on console
+console.log(characterNumber)
+console.log(lowerCase)
+console.log(upperCase)
+console.log(numberValue)
+console.log(specialCharacters)
 }
 
 // Write password to the #password input
@@ -33,4 +40,4 @@ generateBtn.addEventListener("click", writePassword);
 
 // Start process
 
-passwordGenerator();
+passwordQuestions();
