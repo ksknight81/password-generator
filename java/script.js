@@ -13,6 +13,9 @@ var upperCase = window.prompt('Would you like to have an Uppercase value?');
 var numberValue = window.prompt('Would you like to add a number?');
 var specialCharacters = window.prompt('Would you like to use special characters?');
 
+//validate proper values - where == yes or YES for each variable
+
+
 //show values on console
 console.log(characterNumber)
 console.log(lowerCase)
