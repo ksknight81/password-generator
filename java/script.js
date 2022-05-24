@@ -3,8 +3,8 @@ var generateBtn = document.querySelector("#generate");
 
 //what character types?  loop and validate each, with atleast one requirement: lowercase, uppercase, numeric, and/or special characters
 var characterNumber = window.prompt('How many characters would you like your password to be?') 
-  while (characterNumber < 8) {
-    characterNumber = window.prompt('How many characters would you like your password to be? (minimum 8 characters)')
+  while (characterNumber < 8 || characterNumber > 128) {
+    characterNumber = window.prompt('How many characters would you like your password to be? (Password must be between 8 - 128 characters)')
   }
 var lowerCase = window.confirm('Would you like to have a lowercase value? Click OK for yes');
 var upperCase = window.confirm('Would you like to have an Uppercase value?  Click OK for yes');
@@ -12,6 +12,7 @@ var numberQuestion = window.confirm('Would you like to add a number?  Click OK f
 var specialCharacters = window.confirm('Would you like to use special characters?  Click OK for yes');
 
 // ASCII character code constants for password generating
+//const all_char_codes = arrayFromLowToHigh(33 , 126)
 const Uppercase_char_codes = arrayFromLowToHigh(65, 90)
 const Lowercase_char_codes = arrayFromLowToHigh(97, 122)
 const Number_char_codes = arrayFromLowToHigh(48, 57)
@@ -25,9 +26,9 @@ const Symbol_char_codes = arrayFromLowToHigh(33, 47).concat(
 
 // Password Generator function
 function generatePassword () {
-  let charCodes = Lowercase_char_codes
+  let charCodes = Lowercase_char_codes  //all_char_codes this is the problem code
+    if (lowerCase) charCodes = charCodes.concat(Lowercase_char_codes) 
     if (upperCase) charCodes = charCodes.concat(Uppercase_char_codes)
-    if (lowerCase) charCodes = charCodes.concat(Lowercase_char_codes)
     if (numberQuestion) charCodes = charCodes.concat(Number_char_codes)
     if (specialCharacters) charCodes = charCodes.concat(Symbol_char_codes)
   
