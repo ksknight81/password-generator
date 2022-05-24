@@ -1,33 +1,55 @@
-// Assignment code here
-
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
-//Length of password = var characterNumber
-
 //what character types?  loop and validate each, with atleast one requirement: lowercase, uppercase, numeric, and/or special characters
-var passwordQuestions = function() {
-var characterNumber = window.prompt('How many characters would you like your password to be?');
-var lowerCase = window.prompt('Would you like to have a lowercase value?  Enter Yes or No');
-var upperCase = window.prompt('Would you like to have an Uppercase value?  Enter Yes or No');
-var numberValue = window.prompt('Would you like to add a number?  Enter Yes or No');
-var specialCharacters = window.prompt('Would you like to use special characters?  Enter Yes or No');
+var characterNumber = window.prompt('How many characters would you like your password to be?') 
+  while (characterNumber < 8) {
+    characterNumber = window.prompt('How many characters would you like your password to be? (minimum 8 characters)')
+  }
+var lowerCase = window.confirm('Would you like to have a lowercase value? Click OK for yes');
+var upperCase = window.confirm('Would you like to have an Uppercase value?  Click OK for yes');
+var numberQuestion = window.confirm('Would you like to add a number?  Click OK for yes');
+var specialCharacters = window.confirm('Would you like to use special characters?  Click OK for yes');
 
-//validate proper values - where == yes or YES for each variable
-characterNumber = characterNumber.toLowerCase();
-lowerCase = lowerCase.toLowerCase();
-upperCase = upperCase.toLowerCase();
-numberValue = numberValue.toLowerCase();
-specialCharacters = specialCharacters.toLowerCase();
+// ASCII character code constants for password generating
+const Uppercase_char_codes = arrayFromLowToHigh(65, 90)
+const Lowercase_char_codes = arrayFromLowToHigh(97, 122)
+const Number_char_codes = arrayFromLowToHigh(48, 57)
+const Symbol_char_codes = arrayFromLowToHigh(33, 47).concat(
+  arrayFromLowToHigh(58, 64)
+).concat (
+  arrayFromLowToHigh(91, 96)
+).concat (
+  arrayFromLowToHigh(123, 126)
+)
 
-//show values on console
-console.log("how many characters? " + characterNumber)
-console.log("Do i need lowercase? " + lowerCase)
-console.log("Do i need Uppercase? " + upperCase)
-console.log("Do i need a number? " + numberValue)
-console.log("Do i need special characters? " + specialCharacters)
+// Password Generator function
+function generatePassword () {
+  let charCodes = Lowercase_char_codes
+    if (upperCase) charCodes = charCodes.concat(Uppercase_char_codes)
+    if (lowerCase) charCodes = charCodes.concat(Lowercase_char_codes)
+    if (numberQuestion) charCodes = charCodes.concat(Number_char_codes)
+    if (specialCharacters) charCodes = charCodes.concat(Symbol_char_codes)
+  
+    const passwordCharacters = []
+    for (let i = 0; i < characterNumber; i++) {
+      const character = charCodes[Math.floor(Math.random() * charCodes.length)] 
+      passwordCharacters.push(String.fromCharCode(character))
+    }
+    return passwordCharacters.join('')
 }
 
+//Generate Array numbers:
+function arrayFromLowToHigh(low, high) {
+  const array = []
+  for (let i = low; i <= high; i++){
+    array.push(i)
+  }
+  return array
+}
+
+console.log(typeof(characterNumber));
+console.log(characterNumber);
 
 // Write password to the #password input
 function writePassword() {
@@ -38,18 +60,5 @@ function writePassword() {
 
 }
 
-//randomize values
-// if (numberValue === "yes")  {
- // Math.floor(Math.random() * 10);
- //console.log(numberValue)
-// }
-
 // Add event listener to generate buton
 generateBtn.addEventListener("click", writePassword);
-
-// Variables
-
-
-// Start process
-
-passwordQuestions();
